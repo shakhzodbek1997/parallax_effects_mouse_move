@@ -1,36 +1,29 @@
-/**
- * Parallax.js
- * @author Matthew Wagerfield - @wagerfield
- * @description Creates a parallax effect between an array of layers,
- *              driving the motion from the gyroscope output of a smartdevice.
- *              If no gyroscope is available, the cursor position is used.
- */
-;(function(window, document, undefined) {
+(function(window, document, undefined) {
 
   // Strict Mode
   'use strict';
 
   // Constants
   var NAME = 'Parallax';
-  var MAGIC_NUMBER = 30;
+  var MAGIC_NUMBER = 15;
   var DEFAULTS = {
     relativeInput: false,
     clipRelativeInput: false,
     calibrationThreshold: 100,
-    calibrationDelay: 500,
-    supportDelay: 500,
+    calibrationDelay: 250,
+    supportDelay: 250,
     calibrateX: false,
     calibrateY: true,
     invertX: true,
     invertY: true,
     limitX: false,
     limitY: false,
-    scalarX: 10.0,
-    scalarY: 10.0,
-    frictionX: 0.1,
-    frictionY: 0.1,
-    originX: 0.5,
-    originY: 0.5,
+    scalarX: 2.5,
+    scalarY: 2.5,
+    frictionX: 0.05,
+    frictionY: 0.05,
+    originX: 0.25,
+    originY: 0.25,
     pointerEvents: true,
     precision: 1
   };
@@ -229,14 +222,12 @@
       Parallax.prototype.transform3DSupport = Parallax.prototype.transformSupport('3D');
     }
 
-    // Configure Context Styles
     if (this.transform3DSupport) this.accelerate(this.element);
     var style = window.getComputedStyle(this.element);
     if (style.getPropertyValue('position') === 'static') {
       this.element.style.position = 'relative';
     }
 
-    // Pointer events
     if(!this.pointerEvents){
       this.element.style.pointerEvents = 'none';
     }
@@ -250,12 +241,10 @@
 
   Parallax.prototype.updateLayers = function() {
 
-    // Cache Layer Elements
     this.layers = this.element.getElementsByClassName('layer');
     this.depthsX = [];
     this.depthsY = [];
 
-    // Configure Layer Styles
     for (var i = 0, l = this.layers.length; i < l; i++) {
       var layer = this.layers[i];
       if (this.transform3DSupport) this.accelerate(layer);
@@ -264,8 +253,7 @@
       layer.style.left = 0;
       layer.style.top = 0;
 
-      // Cache Layer Depth
-      //Graceful fallback on depth if depth-x or depth-y is absent
+
       var depth = this.data(layer, 'depth') || 0;
       this.depthsX.push(this.data(layer, 'depth-x') || depth);
       this.depthsY.push(this.data(layer, 'depth-y') || depth);

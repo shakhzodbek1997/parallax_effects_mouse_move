@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Parallax effect</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="css/main.css">
     <script src="js/parallax.js"></script>
 </head>
 <body>
-<div class="container">
+<div class="my_container">
     <ul id="scene">
         <li class="layer" data-depth=".1">
-            <img src="img/text.png" alt="img text ">
+            <img src="img/text.png" alt="text img">
         </li>
         <li class="layer" data-depth="1">
             <img src="img/planet1.png" alt="img planet">
@@ -26,9 +26,9 @@
         </li>
     </ul>
 </div>
-<script>
-    var scene = document.getElementById('scene');
-    var parallax = new Parallax(scene);
-</script>
+
+
+
+<script src="js/main.js"></script>
 </body>
 </html>
